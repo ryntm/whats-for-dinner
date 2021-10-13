@@ -1,0 +1,8 @@
+main {
+}
+
+#show-all-meals, #chosen-meals {
+    display: inline-block;
+    border: 1px black solid;
+    margin: 5px
+}

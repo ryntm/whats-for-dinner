@@ -38,15 +38,29 @@ console.log(doc)
 //
 
 let addBtn = document.getElementById('addmeal-btn')
+let displayAll = document.getElementById('show-all-meals')
 
 addBtn.addEventListener('click', () => {
-    if (newMeal.value != 'Add new meal here') {
+    if (newMeal.value != '') {
         let newArray = JSON.parse(localStorage.getItem('hi'))
         console.log(newArray)
         newArray.push(newMeal.value)
         localStorage.setItem('hi', JSON.stringify(newArray))
-        newMeal.value = 'Add new meal here'
+        displayAll.append(newMeal.value)
+        newMeal.value = ''
+
+        displayAll.appendChild(document.createElement('br'))
+
     } else {
         alert('There is no meal to add in text field.')
     }
 })
+
+
+
+for (let i = 0; i < JSON.parse(localStorage.getItem('hi')).length; i++) {
+    let displayArray = JSON.parse(localStorage.getItem('hi'))
+    displayAll.append(displayArray[i])
+    displayAll.appendChild(document.createElement('br'))
+
+}
