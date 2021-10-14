@@ -4,5 +4,16 @@ main {
 #show-all-meals, #chosen-meals {
     display: inline-block;
     border: 1px black solid;
-    margin: 5px
+    margin: 5px;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+#chosen-meals {
+    vertical-align: top;
+}
+
+
+span {
+    margin-right: 5px;
 }
