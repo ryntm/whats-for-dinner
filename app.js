@@ -30,6 +30,7 @@ console.log([localStorage['hi']])
 
 let newMeal = document.getElementById('addmeal')
 let doc = document.getElementById('doc')
+let chosenDinners = []
 
 console.log(newMeal.value)
 
@@ -37,7 +38,9 @@ console.log(newMeal.value)
 //
 
 let addBtn = document.getElementById('addmeal-btn')
+let chooseBtn = document.getElementById('choose-meals')
 let displayAll = document.getElementById('show-all-meals')
+let displayRandom = document.getElementById('chosen-meals')
 
 addBtn.addEventListener('click', () => {
     if (newMeal.value != '') {
@@ -54,14 +57,48 @@ addBtn.addEventListener('click', () => {
         window.location.reload()
         // without it loading, I need to create a span with an ID following the last span. 
 
-
-
     } else {
         alert('There is no meal to add in text field.')
     }
 })
 
+let index = Math.floor(Math.random() * JSON.parse(localStorage.getItem('hi')).length);
 
+console.log(index);
+
+let pickDinners = () => {
+    //pick a number between 0 and the length of the dinner's away
+    //check if that nuber is already in the chosenDinners array
+    //if the index of checking that index with the chosenDinner is greater than one, then push it to chosenDinner array
+    while (chosenDinners.length < 4) {
+        if (chosenDinners.indexOf(index) === -1) {
+            chosenDinners.push(index) 
+        } else {
+            index = Math.floor(Math.random() * JSON.parse(localStorage.getItem('hi')).length)
+        }
+    }
+    console.log(chosenDinners)
+
+    for (let i = 0; i < chosenDinners.length; i++) {
+        let displayArray = JSON.parse(localStorage.getItem('hi'))
+        // let x = document.createElement(`a`)
+        // x.append(`[x]`)
+        // x.setAttribute('id', `${i}`)
+        // x.setAttribute('href', ``)
+        // x.setAttribute('class', `delete-dinner`)
+        displayRandom.append(displayArray[chosenDinners[i]])
+        // document.getElementById(`dinner${i}`).append(displayArray[i])
+        displayRandom.appendChild(document.createElement('br'))
+    
+    }
+}
+console.log(chosenDinners)
+
+chooseBtn.addEventListener('click', () => {
+    displayRandom.innerHTML = "<h3>Randomly Selected Meals</h3>"
+    pickDinners()
+    chosenDinners = []
+})
 
 for (let i = 0; i < JSON.parse(localStorage.getItem('hi')).length; i++) {
     let displayArray = JSON.parse(localStorage.getItem('hi'))
